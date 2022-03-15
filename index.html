@@ -10,28 +10,21 @@
 
 <body>
 
-  <script src="https://unpkg.com/vue@3"></script>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script src="javascript.js" type="text/javascript"></script>
-
-  <div class="container">
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">First</th>
-          <th scope="col">Last</th>
-          <th scope="col">Handle</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="user in users" v-bind: key="user.id">
-          <th scope="row">{{user.id}}</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
+  <div id="myapp">
+    <h1 style="text-align: center;">Advice App</h1>
+    <div class="card" style="width: 18rem;">
+      <img class="card-img-top" src="..." alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Advice for the day is... </h5>
+        <p class="card-text">{{id}}</p>
+        <p class="card-text">{{text}}</p>
+      </div>
+    </div>
+    {{responsedata}}
   </div>
 </body>
+<script src="https://unpkg.com/vue@3"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="javascript.js" type="text/javascript"></script>
 
 </html>
