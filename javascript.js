@@ -1,10 +1,10 @@
-const API = 'https://api.adviceslip.com/advice'
+const API = 'https://jsonplaceholder.typicode.com/todos'
 const myappcomponent = {
   data() {
     return {
       responsedata: {},
       id: '',
-      text: '',
+      name: '',
     }
   },
   methods: {
@@ -12,8 +12,6 @@ const myappcomponent = {
       await axios.get(API)
         .then((response) => {
           this.responsedata = response.data
-          this.id = response.data.slip.id,
-            this.text = response.data.slip.advice
         })
 
         .catch((error) => {
