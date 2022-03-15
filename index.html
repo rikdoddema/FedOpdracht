@@ -3,27 +3,63 @@
 
 <head>
   <title></title>
-  <link rel="stylesheet" href="css.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+    crossorigin="anonymous">
+
 </head>
 
 <body>
 
   <script src="https://unpkg.com/vue@3"></script>
+  <div class="container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">First</th>
+          <th scope="col">Last</th>
+          <th scope="col">Handle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="user in users" v-bind: key="user.id">
+          <th scope="row">{{user.id}}</th>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+  </div>
 
   <div id="app">
+    {{ info }}
+  </div>
+
+
+
+
+  <!-- <div id="app">
     <button @click="count++">
       count is: {{ count }}
     </button>
   </div>
+-->
 
   <script>
-    Vue.createApp({
+
+    new Vue({
+      el: '#app',
       data() {
         return {
-          count: '0'
+          info: null
         }
+      },
+      mounted() {
+        axios
+          .get('https://api.coindesk.com/v1/bpi/currentprice.json')
+          .then(response => (this.info = response))
       }
-    }).mount('#app')
+    })
+
   </script>
 
 
