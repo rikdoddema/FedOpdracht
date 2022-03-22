@@ -1,29 +1,32 @@
-const API = 'https://jsonplaceholder.typicode.com/todos'
+const API = 'https://api2.binance.com/api/v3/ticker/24hr'
 const myappcomponent = {
   data() {
     return {
-      responsedata: {},
-      id: '',
-      name: '',
+      coins: {},
+      symbol: '',
     }
   },
+
+
   methods: {
     async fetchApi() {
       await axios.get(API)
         .then((response) => {
-          this.responsedata = response.data
+          this.coins = response.data
+          //location.reload();
         })
-
         .catch((error) => {
           console.log(error)
         })
 
     }
   },
+
   mounted() {
     this.fetchApi()
-  }
+  },
 
 }
+
 
 const myapp = Vue.createApp(myappcomponent).mount('#myapp')

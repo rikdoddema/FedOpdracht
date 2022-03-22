@@ -11,22 +11,26 @@
 <body>
 
   <div id="myapp">
-    <h1 style="text-align: center;">UserData</h1>
+    <h1 style="text-align: center;">Crypto prices</h1>
     <table class="table">
       <thead>
         <tr>
-          <th scope="col">#</th>
-          <th scope="col">User</th>
-          <th scope="col">Title</th>
-          <th scope="col">Completed</th>
+          <th scope="col">Coin</th>
+          <th scope="col">Percentage</th>
+          <th scope="col">Price</th>
+          <th scope="col">Highest today</th>
+          <th scope="col">Lowest today</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(responsedata, index) of responsedata">
-          <th scope="row">{{responsedata.userId}}</th>
-          <td>{{responsedata.id}}</td>
-          <td>{{responsedata.title}}</td>
-          <td>{{responsedata.completed}}</td>
+        <tr v-for="(coins, index) of coins">
+          <th scope="row">{{coins.symbol}}</th>
+          <td v-if=" coins.priceChangePercent > 0" style="color: green;">{{coins.priceChangePercent}}%</td>
+          <td v-else style="color: red;">{{coins.priceChangePercent}}%</td>
+          <td v-if=" coins.priceChangePercent > 0" style="color: green;">{{coins.lastPrice}}</td>
+          <td v-else style="color: red">{{coins.lastPrice}}</td>
+          <td>{{coins.highPrice}}</td>
+          <td>{{coins.lowPrice}}</td>
         </tr>
   </div>
 </body>
