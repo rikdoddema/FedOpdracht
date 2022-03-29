@@ -4,6 +4,7 @@ const myappcomponent = {
   data() {
     return {
       coins: {},
+      tempCoins: {}
     }
   },
 
@@ -12,12 +13,21 @@ const myappcomponent = {
       await axios.get(API)
         .then((response) => {
           this.coins = response.data
-          //location.reload();
+
+          let tempCoins = this.coins;
+
+          tempCoins.map((coin) => {
+
+            if (coin.lastPrice.length > 8) {
+              coin.lastPrice = coin.lastPrice.substr(0, coin.lastPrice.length - 2);
+            }
+          })
+
         })
         .catch((error) => {
           console.log(error)
         });
-      setTimeout(this.fetchApi, 500);
+      setTimeout(this.fetchApi, 5000);
     },
 
   },
