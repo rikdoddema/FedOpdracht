@@ -1,12 +1,11 @@
 const API = 'https://api2.binance.com/api/v3/ticker/24hr'
 const myappcomponent = {
+
   data() {
     return {
       coins: {},
-      symbol: '',
     }
   },
-
 
   methods: {
     async fetchApi() {
@@ -17,9 +16,10 @@ const myappcomponent = {
         })
         .catch((error) => {
           console.log(error)
-        })
+        });
+      setTimeout(this.fetchApi, 500);
+    },
 
-    }
   },
 
   mounted() {
