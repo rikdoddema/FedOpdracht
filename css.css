@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+body{
+  background-color:black;
+}
+
+.sort-bar a{
+  margin: 10px;
+  cursor: pointer;
+  font-family: "Open Sans", sans-serif;
+  color: white;
+  text-decoration: none;
+
+}
+
+.sort-bar a.active {
+  background: orange;
+  color: black;
+  margin: 15px;
+}
+
+.landingspagina {
+  background-image: url("img/Bitcoin-Emblem.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 1440px 810px;
+  width: 1440px;
+  height: 810px;
+}
+.introhead1{
+  text-align: center;
+  padding-top: 275px;
+  font-family: "Open Sans", sans-serif;
+  font-weight:bold;
+  color:white;
+  font-size: 75px;
+}
+.introhead2{
+  text-align: center;
+  font-family: "Open Sans", sans-serif;
+  font-weight:bold;
+  color:white;
+  font-size: 35px;
+}
+
+.introtxt{
+    text-align: center;
+    font-family: "Open Sans", sans-serif;
+    color:white;
+    padding-left: 425px;
+    padding-right: 425px;
+  }
+
+
+.table{
+  color:white;
+}

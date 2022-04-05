@@ -4,8 +4,31 @@ const myappcomponent = {
   data() {
     return {
       coins: {},
-      tempCoins: {}
+      tempCoins: {},
+      sortOrder: "Popularity",
     }
+  },
+
+  watch: {
+    coins() {
+      this.tempCoins = this.coins.filter((coin) => {
+        coin.priceChangePercent = coin.priceChangePercent.substr(0, 5);
+        coin.lastPrice = coin.lastPrice.substr(0, coin.lastPrice.length - 6);
+        coin.highPrice = coin.highPrice.substr(0, coin.highPrice.length - 6);
+        coin.lowPrice = coin.lowPrice.substr(0, coin.lowPrice.length - 6);
+        return (coin.quoteVolume > 100000000);
+      })
+    }
+  },
+
+  computed: {
+    orderedListOptions: function () {
+      return {
+        "Popularity": () => { return this.coins },
+        "A tot Z": () => { return this.coins.slice().sort() },
+        "Z tot A": () => { return this.coins.slice().sort().reverse() },
+      }
+    },
   },
 
   methods: {
@@ -13,22 +36,19 @@ const myappcomponent = {
       await axios.get(API)
         .then((response) => {
           this.coins = response.data
-
-          let tempCoins = this.coins;
-
-          tempCoins.map((coin) => {
-
-            if (coin.lastPrice.length > 8) {
-              coin.lastPrice = coin.lastPrice.substr(0, coin.lastPrice.length - 2);
-            }
-          })
-
         })
+
         .catch((error) => {
           console.log(error)
         });
-      setTimeout(this.fetchApi, 5000);
+      setTimeout(this.fetchApi, 4000);
     },
+
+    methods: {
+      sort: function (sortOrder) {
+        return this.orderedListOptions[sortOrder]()
+      }
+    }
 
   },
 

@@ -9,8 +9,17 @@
 </head>
 
 <body>
+  <div class="landingspagina">
+    <h1 class="introhead1">Single page webapp</h1>
+    <h2 class="introhead2">Rik Doddema</h2>
+    <p class="introtxt">Dit is mijn single page application voor het vak Front-End-Development. Ik heb gekozen voor een Live crypto data app,
+      waarbij er gesorteerd kan worden op hoogste stijgers van de afgelopen 24 uur.
+    </p>
+  </div>
   <div id="myapp">
-    <h1 style="text-align: center;">Live crypto prices</h1>
+    <div class="sort-bar">
+      <a v-for="sortkey in Object.keys(orderedListOptions)" v-on:click="sortOrder = sortkey" v-bind:class="{active: sortOrder == sortkey}">{{sortkey}}</a>
+    </div>
     <table class="table">
       <thead>
         <tr>
@@ -22,14 +31,15 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(coins, index) of coins">
-          <th scope="row">{{coins.symbol}}</th>
+        <tr v-for="(coins, index) in tempCoins">
+          <th scope="row">{{coins.symbol}}
+          </th>
           <td v-if=" coins.priceChangePercent > 0" style="color: green;">{{coins.priceChangePercent}}%</td>
           <td v-else style="color: red;">{{coins.priceChangePercent}}%</td>
-          <td v-if=" coins.priceChangePercent > 0" style="color: green;">{{coins.lastPrice}}</td>
-          <td v-else style="color: red">{{coins.lastPrice}}</td>
-          <td>{{coins.highPrice}}</td>
-          <td>{{coins.lowPrice}}</td>
+          <td v-if=" coins.priceChangePercent > 0" style="color: green;">${{coins.lastPrice}}</td>
+          <td v-else style="color: red">${{coins.lastPrice}}</td>
+          <td>${{coins.highPrice}}</td>
+          <td>${{coins.lowPrice}}</td>
         </tr>
   </div>
 </body>
