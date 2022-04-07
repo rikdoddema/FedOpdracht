@@ -40,7 +40,8 @@ const myappcomponent = {
     async fetchApi() {
       await axios.get(API)
         .then((response) => {
-          this.coins = response.data
+          if (this.searchValue == '')
+            this.coins = response.data
           setTimeout(this.fetchApi, 4000);
         })
         .catch((error) => {

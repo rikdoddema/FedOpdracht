@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
 body{
-  background-color:black;
+  background-color: #000;
 }
 
 .sort-bar{
@@ -14,6 +14,8 @@ text-align: left;
   color: white;
   width: 100px;
   cursor: default;
+  font-size: 19px;
+  font-weight: bold;
 }
 
 .sort-bar a{
@@ -54,13 +56,16 @@ transition-delay:0,2s;
   background-image: url("img/Bitcoin-Emblem.png");
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 1920px 1080px;
-  width: 1920px;
+  background-size: contain;
+  object-fit: contain;
+  width: auto;
   height: 1080px;
 }
 .introhead1{
   text-align: center;
-  padding-top: 220px;
+  padding-top: 350px;
+  margin: auto;
+  width: 60%;
   font-family: "Open Sans", sans-serif;
   font-weight:bold;
   color:white;
