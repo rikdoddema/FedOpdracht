@@ -5,18 +5,21 @@ const myappcomponent = {
     return {
       coins: {},
       tempCoins: {},
-      sortOrder: "Popularity",
+      sortOrder: "Standaard",
+      searchValue: "",
     }
   },
 
   watch: {
     coins() {
       this.tempCoins = this.coins.filter((coin) => {
-        coin.priceChangePercent = coin.priceChangePercent.substr(0, 5);
-        coin.lastPrice = coin.lastPrice.substr(0, coin.lastPrice.length - 6);
-        coin.highPrice = coin.highPrice.substr(0, coin.highPrice.length - 6);
-        coin.lowPrice = coin.lowPrice.substr(0, coin.lowPrice.length - 6);
-        return (coin.quoteVolume > 100000000);
+        coin.priceChangePercent = coin.priceChangePercent.substr(0, coin.priceChangePercent.length - 2);
+        coin.lastPrice = coin.lastPrice.substr(0, coin.lastPrice.length - 5);
+        coin.highPrice = coin.highPrice.substr(0, coin.highPrice.length - 5);
+        coin.lowPrice = coin.lowPrice.substr(0, coin.lowPrice.length - 5);
+        coin.quoteVolume = coin.quoteVolume.substr(0, coin.quoteVolume.length - 3);
+        return coin.symbol.includes("USDT") && (coin.quoteVolume > 0);
+
       })
     }
   },
@@ -24,9 +27,11 @@ const myappcomponent = {
   computed: {
     orderedListOptions: function () {
       return {
-        "Popularity": () => { return this.coins },
-        "A tot Z": () => { return this.coins.slice().sort() },
-        "Z tot A": () => { return this.coins.slice().sort().reverse() },
+        "Standaard": () => { return this.tempCoins },
+        "Stijgers 24u": () => { return this.tempCoins.slice().sort((a, b) => b.priceChangePercent - a.priceChangePercent) },
+        "Dalers 24u": () => { return this.tempCoins.slice().sort((a, b) => a.priceChangePercent - b.priceChangePercent) },
+        "Meeste Volume": () => { return this.tempCoins.slice().sort((a, b) => b.quoteVolume - a.quoteVolume) },
+        "Hoogste prijs": () => { return this.tempCoins.slice().sort((a, b) => b.lastPrice - a.lastPrice) },
       }
     },
   },
@@ -36,22 +41,27 @@ const myappcomponent = {
       await axios.get(API)
         .then((response) => {
           this.coins = response.data
+          setTimeout(this.fetchApi, 4000);
         })
-
         .catch((error) => {
           console.log(error)
         });
-      setTimeout(this.fetchApi, 4000);
+
     },
-
-    methods: {
-      sort: function (sortOrder) {
-        return this.orderedListOptions[sortOrder]()
+    sort: function (sortOrder) {
+      return this.orderedListOptions[sortOrder]()
+    },
+    submit() {
+      if (this.searchValue != '' && this.searchValue) {
+        this.tempCoins = this.coins.filter((coin) => {
+          return coin.symbol
+            .toUpperCase()
+            .includes(this.searchValue.toUpperCase())
+        })
       }
+
     }
-
   },
-
   mounted() {
     this.fetchApi()
   },

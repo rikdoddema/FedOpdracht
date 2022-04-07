@@ -4,19 +4,50 @@ body{
   background-color:black;
 }
 
+.sort-bar{
+margin-bottom: 50px;
+text-align: left;
+}
+
+.sort-bar p{
+  margin-left: 12px;
+  color: white;
+  width: 100px;
+  cursor: default;
+}
+
 .sort-bar a{
-  margin: 10px;
-  cursor: pointer;
+  margin-left: 12px;
+  margin-right: 50px;
   font-family: "Open Sans", sans-serif;
   color: white;
   text-decoration: none;
+  cursor: pointer;
 
+}
+.sort-bar a:hover {
+color: #d97e13;
+transition-delay:0,2s;
 }
 
 .sort-bar a.active {
-  background: orange;
-  color: black;
-  margin: 15px;
+  text-decoration-line: underline;
+  color:#d97e13;
+  font-weight:bold;
+}
+
+.sort-bar form{
+  float:right;
+  margin-right: 10px;
+}
+
+.sort-bar button{
+  height: 31px;
+}
+
+.sort-bar input{
+  height: 31px;
+  width: 100px;
 }
 
 .landingspagina {
@@ -29,7 +60,7 @@ body{
 }
 .introhead1{
   text-align: center;
-  padding-top: 275px;
+  padding-top: 220px;
   font-family: "Open Sans", sans-serif;
   font-weight:bold;
   color:white;
@@ -51,7 +82,34 @@ body{
     padding-right: 425px;
   }
 
+.table thead tr{
+background-color: #d97e13;
+text-align: left;
+}
+
+.table thead tr:last-of-type{
+  border-bottom: 2px solid #d97e13;
+}
+
+.table th,
+.table td{
+  padding: 12px 15px;
+}
+
+.table tbody tr{
+border-bottom: 1px solid #ddd;
+}
+
+.table tbody tr:nth-of-type(even) {
+  background-color: #222
+}
+
+
+.table tbody tr:last-of-type{
+  border-bottom: 2px solid #d97e13;
+}
 
 .table{
   color:white;
+
 }

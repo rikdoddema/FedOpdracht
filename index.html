@@ -12,34 +12,44 @@
   <div class="landingspagina">
     <h1 class="introhead1">Single page webapp</h1>
     <h2 class="introhead2">Rik Doddema</h2>
-    <p class="introtxt">Dit is mijn single page application voor het vak Front-End-Development. Ik heb gekozen voor een Live crypto data app,
-      waarbij er gesorteerd kan worden op hoogste stijgers van de afgelopen 24 uur.
+    <p class="introtxt">Dit is mijn single page application voor het vak Front-End-Development. Ik heb gekozen voor een Live cryptopair data
+      app, waarbij er gesorteerd kan worden op stijgers en dalers van de afgelopen 24 uur, de pairs met de hoogste prijs
+      en de pairs met het meeste volume.
     </p>
   </div>
   <div id="myapp">
     <div class="sort-bar">
+      <p>Sorteer op:</p>
       <a v-for="sortkey in Object.keys(orderedListOptions)" v-on:click="sortOrder = sortkey" v-bind:class="{active: sortOrder == sortkey}">{{sortkey}}</a>
+      <form @submit.prevent="submit">
+        <input type="text" v-model="searchValue" placeholder="Zoek coin" id="search-input"></input>
+        <button type="submit">Zoek</button>
+      </form>
     </div>
     <table class="table">
       <thead>
         <tr>
           <th scope="col">Coin</th>
-          <th scope="col">Last 24h</th>
-          <th scope="col">Price</th>
-          <th scope="col">Highest today</th>
-          <th scope="col">Lowest today</th>
+          <th scope="col">% afgelopen 24u</th>
+          <th scope="col">Prijs</th>
+          <th scope="col">Hoogste vandaag</th>
+          <th scope="col">Laagste vandaag</th>
+          <th scope="col">Volume</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(coins, index) in tempCoins">
+        <tr v-for="(coins, index) in sort(sortOrder)">
           <th scope="row">{{coins.symbol}}
           </th>
           <td v-if=" coins.priceChangePercent > 0" style="color: green;">{{coins.priceChangePercent}}%</td>
+          <td v-else-if=" coins.priceChangePercent == 0" style="color:darkgray">{{coins.priceChangePercent}}%</td>
           <td v-else style="color: red;">{{coins.priceChangePercent}}%</td>
           <td v-if=" coins.priceChangePercent > 0" style="color: green;">${{coins.lastPrice}}</td>
+          <td v-else-if=" coins.priceChangePercent == 0" style="color:darkgray">${{coins.lastPrice}}</td>
           <td v-else style="color: red">${{coins.lastPrice}}</td>
           <td>${{coins.highPrice}}</td>
           <td>${{coins.lowPrice}}</td>
+          <td>{{coins.quoteVolume}}</td>
         </tr>
   </div>
 </body>
